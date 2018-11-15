@@ -1,5 +1,11 @@
 const http = require('http')
 const handles = require('./handles')
+express = require('express')
 
-const server = http.createServer(handles.serverHandle);
-server.listen(8080)
+
+handles.app.set('port', 8080);
+
+handles.app.listen(
+  handles.app.get('port'),
+  () => console.log(`server listening on ${app.get('port')}`)
+)

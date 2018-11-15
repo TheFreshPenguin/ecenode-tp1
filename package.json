@@ -1,0 +1,23 @@
+{
+  "name": "ecenode-tp1",
+  "version": "1.0.0",
+  "description": "This is the first lab for the nodeJS Course. it says hello to the person doing a http request over the server. It has a special reply if you say hello to me (antoine) !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheFreshPenguin/ecenode-tp1.git"
+  },
+  "author": "Antoine Castel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheFreshPenguin/ecenode-tp1/issues"
+  },
+  "homepage": "https://github.com/TheFreshPenguin/ecenode-tp1#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.6"
+  }
+}

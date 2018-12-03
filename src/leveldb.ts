@@ -5,16 +5,14 @@ import fs = require('fs')
 import del = require('del')
 
 export class LevelDb {
-  open(path: string) {
+   static open(path: string) {
     const encoded = encoding(leveldown(path), { valueEncoding: 'json' })
     return levelup(encoded)
+  }
 
-    static clear(path: string) {
+  static clear(path: string) {
     if (fs.existsSync(path)) {
       del.sync(path, { force: true })
     }
-  }
-
-
   }
 }

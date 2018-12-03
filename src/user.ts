@@ -1,4 +1,4 @@
-import { LevelDB } from "./leveldb"
+import { LevelDb } from "./leveldb"
 import WriteStream from 'level-ws'
 
 export class User {
@@ -30,10 +30,11 @@ export class User {
 
     public validatePassword(toValidate: String): boolean {
       // return comparison with hashed password
+      return true
     }
   }
 
-  xport class UserHandler {
+  export class UserHandler {
   public db: any
 
   public get(username: string, callback: (err: Error | null, result?: User) => void) {
@@ -55,6 +56,6 @@ export class User {
   }
 
   constructor(path: string) {
-    this.db = LevelDB.open(path)
+    this.db = LevelDb.open(path)
   }
 }

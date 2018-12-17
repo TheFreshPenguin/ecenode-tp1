@@ -54,7 +54,6 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
       res.redirect('/login')
     } else {
       req.session.loggedIn = true
-      console.log(result.username)
       req.session.username = result.username
       res.redirect('/')
     }
@@ -99,11 +98,23 @@ const authCheck = function (req: any, res: any, next: any) {
   } else res.redirect('/login')
 }
 
-app.get('/', authCheck, (req: any, res: any) => {
+app.get('/', authCheck, (req: any, res: any, next: any) => {
 
-//get metrics
+  //get metrics
 
-  console.log(typeof(req.session.username))
+  // var mets
+  //
+  // dbMet.get(req.session.username, (err: Error | null, result?: Metric[]) => {
+  //   if (err) next(err)
+  //   if (result !== undefined) {
+  //     mets = result
+  //     console.log("found")
+  //   }
+  // })
+  //
+  // console.log("mets"+ typeof(mets))
+
+
   res.render('index', { name: req.session.username })
 })
 

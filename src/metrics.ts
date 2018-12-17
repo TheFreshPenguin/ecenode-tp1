@@ -37,7 +37,6 @@ public get(key: string, callback: (err: Error | null, result?: Metric[]) => void
       })
       .on('data', (data: any) => {
         const [_, k, timestamp] = data.key.split(":")
-        console.log(data.key+"\n")
         const value = data.value
 
         if (key != k) {

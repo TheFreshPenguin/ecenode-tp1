@@ -3,3 +3,20 @@
 <button class="btn btn-danger" href="/logout" onClick='document.location.href="/logout"'>
   Logout
 </button>
+<h2> metrics </h2>
+<body>
+
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  const Http = new XMLHttpRequest();
+  const url=window.location.origin + '/' + "<%= name %>";
+  Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange=(e)=>{
+  console.log(Http.responseText)
+  $("body").append(Http.responseText)
+  }
+</script>

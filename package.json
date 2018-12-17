@@ -21,6 +21,7 @@
   "homepage": "https://github.com/TheFreshPenguin/ecenode-tp1#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "del": "^3.0.0",
     "ejs": "^2.6.1",
     "encoding-down": "^5.0.4",
@@ -32,8 +33,12 @@
     "level-ws": "^1.0.0",
     "leveldown": "^4.0.1",
     "levelup": "^3.1.1",
+    "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.7",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.1"
   },

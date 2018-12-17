@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <div id="form">
-  <p>Please login to your account</p>
+  <p>Please create account</p>
   <hr/>
-  <form action="/login" method="post">
+  <form action="/signup" method="post">
     <div class="form-group">
       <label for="form_username">Username</label>
       <input id="form_username" type="text" name="username" />
@@ -11,10 +11,8 @@
       <label for="form_password">Password</label>
       <input id="form_password" type="password" name="password" />
     </div>
-    <button class="btn btn-primary btn-block" type="submit" value="Submit">Connect</button>
+    <button class="btn btn-success btn-block" type="submit" href="/signup" onClick='document.location.href="/signup"'>
+      Create an account
+    </button>
   </form>
-  <hr/>
-  <button class="btn btn-success btn-block" type="submit" href="/signup" onClick='document.location.href="/signup"'>
-    Create an account
-  </button>
 </div>

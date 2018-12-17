@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const LevelDb = require("./leveldb");
+const leveldb_1 = require("./leveldb");
 const level_ws_1 = __importDefault(require("level-ws"));
 class Metric {
     constructor(ts, v) {
@@ -14,8 +14,15 @@ class Metric {
 exports.Metric = Metric;
 class MetricsHandler {
     constructor(dbPath) {
-        this.db = LevelDb.open(dbPath);
+        this.db = leveldb_1.LevelDb.open(dbPath);
     }
+    // public get(callback: (error: Error | null, result?: Metric[]) => void) {
+    //     const result = [
+    //       new Metric('2013-11-04 14:00 UTC', 12),
+    //       new Metric('2013-11-04 14:30 UTC', 15)
+    //     ]
+    //     callback(null, result)
+    //   }
     get(key, callback) {
         const stream = this.db.createReadStream();
         var met = [];
@@ -39,7 +46,7 @@ class MetricsHandler {
         stream.on('error', callback);
         stream.on('close', callback);
         metrics.forEach((m) => {
-            stream.write({ key: "metric:${key}${m.timestamp}", value: m.value });
+            stream.write({ key: `metric:${key}:${m.timestamp}`, value: m.value });
         });
         stream.end();
     }

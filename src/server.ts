@@ -69,6 +69,7 @@ userRouter.post('/', (req: any, res: any, next: any) => {
     if (!err || result !== undefined) {
       res.status(409).send("user already exists")
     } else {
+      console.log("reqbody type = " + typeof(req.body))
       dbUser.save(req.body, function (err: Error | null) {
 
         if (err) next(err)
@@ -123,6 +124,16 @@ app.get('/', (req: any, res: any) => {
   res.end()
 })
 
+app.get('/me', (req: any, res: any, next: any) => {
+  dbMet.get(req.session.username, (err: Error | null, result?: Metric[]) => {
+    console.log("cookie seesion?= " + req.session.username)
+    if (err) next(err)
+    if (result === undefined) {
+      res.write('no result')
+      res.send()
+    } else res.json(result)
+  })
+})
 
 app.get('/:id', (req: any, res: any, next: any) => {
   dbMet.get(req.params.id, (err: Error | null, result?: Metric[]) => {
@@ -133,6 +144,8 @@ app.get('/:id', (req: any, res: any, next: any) => {
     } else res.json(result)
   })
 })
+
+
 
 app.post('/:id', (req: any, res: any) => {
   dbMet.save(req.params.id, req.body, (err: Error | null) => {

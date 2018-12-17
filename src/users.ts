@@ -4,11 +4,12 @@ import WriteStream from 'level-ws'
 export class User {
   public username: string
   public email: string
-  private password: string = ""
+  private password: string
 
   constructor(username: string, email: string, password: string, passwordHashed: boolean = false) {
     this.username = username
     this.email = email
+    this.password = password
 
     if (!passwordHashed) {
       this.setPassword(password)
@@ -46,6 +47,7 @@ export class User {
   }
 
   public save(user: User, callback: (err: Error | null) => void) {
+    console.log(user.username)
     this.db.put(`user:${user.username}`, `${user.getPassword}:${user.email}`, (err: Error | null) => {
       callback(err)
     })

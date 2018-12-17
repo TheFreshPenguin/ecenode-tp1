@@ -75,7 +75,6 @@ userRouter.post('/', (req: any, res: any, next: any) => {
 
         else {
           res.status(201).send("user persisted")
-          console.log("new user")
         }
       })
     }

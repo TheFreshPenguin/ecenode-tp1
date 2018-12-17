@@ -4,16 +4,16 @@ import WriteStream from 'level-ws'
 export class User {
   public username: string
   public email: string
-  private password: string
+  public password: string
 
   constructor(username: string, email: string, password: string, passwordHashed: boolean = false) {
     this.username = username
     this.email = email
     this.password = password
 
-    if (!passwordHashed) {
-      this.setPassword(password)
-    } else this.password = password
+    // if (!passwordHashed) {
+    //   this.setPassword(password)
+    // } else this.password = password
   }
 
   static fromDb(username: string, value: any): User {
@@ -31,7 +31,8 @@ export class User {
 
     public validatePassword(toValidate: String): boolean {
       // return comparison with hashed password
-      return true
+
+      return(toValidate == this.password)
     }
   }
 
@@ -48,7 +49,7 @@ export class User {
 
   public save(user: User, callback: (err: Error | null) => void) {
     console.log(user.username)
-    this.db.put(`user:${user.username}`, `${user.getPassword}:${user.email}`, (err: Error | null) => {
+    this.db.put(`user:${user.username}`, `${user.password}:${user.email}`, (err: Error | null) => {
       callback(err)
     })
   }

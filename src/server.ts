@@ -54,7 +54,8 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
       res.redirect('/login')
     } else {
       req.session.loggedIn = true
-      req.session.user = result
+      console.log(result.username)
+      req.session.username = result.username
       res.redirect('/')
     }
   })
@@ -99,6 +100,10 @@ const authCheck = function (req: any, res: any, next: any) {
 }
 
 app.get('/', authCheck, (req: any, res: any) => {
+
+//get metrics
+
+  console.log(typeof(req.session.username))
   res.render('index', { name: req.session.username })
 })
 

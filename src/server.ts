@@ -3,6 +3,7 @@ import { MetricsHandler, Metric } from './metrics'
 import { UserHandler, User } from './users'
 import session = require('express-session')
 import levelSession = require('level-session-store')
+import morgan = require('morgan')
 
 const app = express()
 const port: string = process.env.PORT || '8080'
@@ -13,8 +14,7 @@ const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')
 const LevelStore = levelSession(session)
 
 const dbUser: UserHandler = new UserHandler('./db/users')
-const authRouter = express.Router()
-const userRouter = express.Router()
+
 
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs')
@@ -22,12 +22,16 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
+app.use(morgan('dev'))
+
 app.use(session({
   secret: 'my very secret phrase',
   store: new LevelStore('./db/sessions'),
   resave: true,
   saveUninitialized: true
 }))
+
+const authRouter = express.Router()
 
 authRouter.get('/login', (req: any, res: any) => {
   res.render('login')
@@ -43,7 +47,7 @@ authRouter.get('/logout', (req: any, res: any) => {
   res.redirect('/login')
 })
 
-app.post('/login', (req: any, res: any, next: any) => {
+authRouter.post('/login', (req: any, res: any, next: any) => {
   dbUser.get(req.body.username, (err: Error | null, result?: User) => {
     if (err) next(err)
     if (result === undefined || !result.validatePassword(req.body.password)) {
@@ -57,6 +61,8 @@ app.post('/login', (req: any, res: any, next: any) => {
 })
 
 app.use(authRouter)
+const userRouter = express.Router()
+
 
 userRouter.post('/', (req: any, res: any, next: any) => {
   dbUser.get(req.body.username, function (err: Error | null, result?: User) {
@@ -67,7 +73,10 @@ userRouter.post('/', (req: any, res: any, next: any) => {
 
         if (err) next(err)
 
-        else res.status(201).send("user persisted")
+        else {
+          res.status(201).send("user persisted")
+          console.log("new user")
+        }
       })
     }
   })

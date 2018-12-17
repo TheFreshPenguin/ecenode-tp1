@@ -4,7 +4,7 @@ import { Metric, MetricsHandler } from '../src/metrics'
 import { UserHandler, User } from '../src/users'
 
 
-//some metrics 
+//some metrics
 
 const met = [
   new Metric(`${new Date('2013-11-04 14:00 UTC').getTime()}`, 12),
@@ -16,9 +16,15 @@ const db = new MetricsHandler('../db/metrics')
 
 db.save('thomyorke', met, (err: Error | null) => {
   if (err) throw err
-  console.log('Data populated')
+  else console.log('Data populated')
 })
 
+db.get('thomyorke', (err: Error | null, result?: Metric[]) => {
+  if (err) throw(err)
+  if (result === undefined) {
+    console.log('no result')
+  } else console.log(result[0].timestamp.toString())
+})
 
 
 //use the userRouter

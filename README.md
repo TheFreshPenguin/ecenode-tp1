@@ -1,21 +1,33 @@
 # ecenode-tp1
 
-## introduction 
+## introduction
 
-This is the first lab for the nodeJS Course. it says hello to the person doing a http request over the server. It has a special reply if you say hello to me (antoine) !
+final project
 
 ## installation instructions
 
-no installation needed for the moment. Just run 
-`node index.js`
-
+please run `npm-run start`
 ## usage instructions
 
-Do a request such as this:
-http://localhost:8080/hello?name=eric
+Go to http://localhost:8080
+Here, you can create a new user by going to create an user.
+Then, after filling the form, go back to the index.
 
-remplace the name with "antoine" for an easter egg!
+populate some metrics using postman:
+
+post request to http://localhost:8080/:username
+
+`[
+  { "timestamp":"1384686660003", "value":"16" },
+  { "timestamp":"1384686660004", "value":"16" },
+  { "timestamp":"1384686660005", "value":"16" },
+  { "timestamp":"1384686660006", "value":"16" }
+]`
+
+if you log in, you will be able to see your own metrics.
+
+In this version you can't access other metrics but the route function that calls only the metrics of the logged in person is independant (GET - http://localhost:8080/me ) from the omniscient route function (all metrics available)
 
 ## contributors
 
-only me
+only me and coffee
